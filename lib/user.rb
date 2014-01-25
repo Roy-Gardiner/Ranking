@@ -10,7 +10,7 @@ class User
   						}
 		@level_difference_uplift =
 							{
-  	             -1 =>    0,  0 =>    3,     
+  	             -1 =>    1,  0 =>    3,     
   	              1 =>   10,  2 =>   40,    3 => 90,  4 =>  160,  5 => 250,
   	              6 =>  360,  7 =>  490,   8 => 640,  9 =>  810, 10 => 1000,
   	             11 => 1210, 12 => 1440, 13 => 1690, 14 => 1960, 15 => 2250
@@ -36,23 +36,13 @@ class User
 
 	def inc_progress kata
 
-		#return kata < -8 || kata = 0 || kata > 8
-		raise "3 kinds of hell" if kata < -8 || kata == 0 || kata > 8
-
+		raise "3 kinds of hell" if !@ranks.include?(kata)
 		return if rank >= 8
-#puts "------------"
-#puts "1    #{@ranks[@rank]}"
-#puts "2    #{@ranks[kata]}"
 		rank_difference = @ranks[kata] - @ranks[@rank]
-#puts "rank difference   #{rank_difference}"
 		return if rank_difference <= -2
+
 		new_points_total = @rank_points[@rank] + @progress + @level_difference_uplift[rank_difference]
-#puts " currrent progress total #{@progress}"
-#puts " currrent rank #{@rank}"
-#puts " uplift #{@level_difference_uplift[rank_difference]}"
-#puts " new points total #{new_points_total}" 
-#puts " divided by 100 #{new_points_total/100}"
-#puts " remainder formed #{new_points_total%100}"
+
 		if new_points_total >= 1500
 			@rank = 8
 			@progress = 0
@@ -60,6 +50,5 @@ class User
 			@rank = @to_ranks[new_points_total/100]	
 			@progress = new_points_total%100
 		end
-#puts "final rank  #{@rank} progress  #{@progress}"
 	end
 end
