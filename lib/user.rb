@@ -17,9 +17,9 @@ class User
 	FOURTEENTH_RANK = 7
 	HIGHEST_RANK    = 8
 
-	RANKS= [ LOWEST_RANK,	FIRST_RANK, SECOND_RANK, THIRD_RANK, FOURTH_RANK, FIFTH_RANK, SIXTH_RANK, SEVENTH_RANK,
+	RANKS= [ LOWEST_RANK, FIRST_RANK, SECOND_RANK, THIRD_RANK, FOURTH_RANK, FIFTH_RANK, SIXTH_RANK, SEVENTH_RANK,
 		       EIGHTH_RANK, NINTH_RANK, TENTH_RANK, ELEVENTH_RANK, TWELFTH_RANK, THIRTEENTH_RANK, FOURTEENTH_RANK,
-		    	 HIGHEST_RANK 
+           HIGHEST_RANK 
 		     ]
 
 	RANK_POINTS = {
@@ -74,8 +74,8 @@ class User
 	     5  => FIFTH_RANK     , 
 	     6  => SIXTH_RANK     , 
 	     7  => SEVENTH_RANK   , 
-       8  => EIGHTH_RANK    , 
-       9  => NINTH_RANK     ,
+	     8  => EIGHTH_RANK    , 
+	     9  => NINTH_RANK     ,
 	    10  => TENTH_RANK     ,
 	    11  => ELEVENTH_RANK  ,
 	    12  => TWELFTH_RANK   ,
@@ -106,20 +106,14 @@ class User
            }
 
   RANK_DIFFERENCE_BELOW_WHICH_NO_POINTS_AWARDED = -1 
-  MINIMUM_SCORE_IN_RANK = 0  
+  MINIMUM_SCORE_IN_RANK    = 0  
   MAXIMUM_ATTAINABLE_SCORE = 1500      
 
 	def initialize
 
 		@users_current_rank = LOWEST_RANK
-		@progress = MINIMUM_SCORE_IN_RANK
+		@progress           = MINIMUM_SCORE_IN_RANK
 		
-    
-  	@to_ranks = { 
-                0  => -8,  1 => -7, 2  => -6, 3  => -5, 4  => -4, 5  => -3, 6  => -2, 7  => -1,
-                8  =>  1,  9 =>  2, 10 =>  3, 11 =>  4, 12 =>  5, 13 =>  6, 14 =>  7, 15 =>  8
-  						}
-  
 	end
 
 	def rank
@@ -142,24 +136,22 @@ class User
 
 	def validation_failure? solved_kata
 		
-		fail = false
+		status = false
 		raise "3 kinds of hell" if !RANKS.include?(solved_kata)
-		fail = true if @rank_difference < RANK_DIFFERENCE_BELOW_WHICH_NO_POINTS_AWARDED
+		status = true if @rank_difference < RANK_DIFFERENCE_BELOW_WHICH_NO_POINTS_AWARDED
 
-		fail
+		status
 	end
 
 	def assign_rank_based_on new_points_total
-#puts ">>#{new_points_total} #{@progress}"
-		if new_points_total >= MAXIMUM_ATTAINABLE_SCORE 
-	#		puts "taking highest rank"
+ 
+ 		if new_points_total >= MAXIMUM_ATTAINABLE_SCORE 
+
 			@users_current_rank = HIGHEST_RANK
 			@progress           = MINIMUM_SCORE_IN_RANK
-	#		puts "what?! #{@users_current_rank} #{@progress}"
 		else
 			@users_current_rank = NUMBER_RANK_EQUIVALENTS[new_points_total / RANK_POINTS_INCREMENT]	
 			@progress           = new_points_total % RANK_POINTS_INCREMENT
 		end
-	#	puts "!! #{@users_current_rank} #{@progress}"
 	end
 end
