@@ -22,25 +22,26 @@ class User
            HIGHEST_RANK 
 		     ]
 
-	RANK_POINTS = {
+	RANK_POINTS = 
+		{
 
-	         LOWEST_RANK     =>    0,
-	         FIRST_RANK      =>  100,
-	         SECOND_RANK     =>  200,
-	         THIRD_RANK      =>  300,
-	         FOURTH_RANK     =>  400,
-	         FIFTH_RANK      =>  500,
-	         SIXTH_RANK      =>  600,
-	         SEVENTH_RANK    =>  700,
-	         EIGHTH_RANK     =>  800,
-	         NINTH_RANK      =>  900,
-	         TENTH_RANK      => 1000,
-	         ELEVENTH_RANK   => 1100,
-	         TWELFTH_RANK    => 1200,
-	         THIRTEENTH_RANK => 1300,
-	         FOURTEENTH_RANK => 1400,
-	         HIGHEST_RANK    => 1500
-	}
+	    LOWEST_RANK     =>    0,
+	    FIRST_RANK      =>  100,
+	    SECOND_RANK     =>  200,
+	    THIRD_RANK      =>  300,
+	    FOURTH_RANK     =>  400,
+	    FIFTH_RANK      =>  500,
+	    SIXTH_RANK      =>  600,
+	    SEVENTH_RANK    =>  700,
+	    EIGHTH_RANK     =>  800,
+	    NINTH_RANK      =>  900,
+	    TENTH_RANK      => 1000,
+	    ELEVENTH_RANK   => 1100,
+	    TWELFTH_RANK    => 1200,
+	    THIRTEENTH_RANK => 1300,
+	    FOURTEENTH_RANK => 1400,
+	    HIGHEST_RANK    => 1500
+		}
 	RANK_POINTS_INCREMENT  = 100
 
 	RANK_NUMBER_EQUIVALENTS = 
@@ -66,46 +67,45 @@ class User
 
 	NUMBER_RANK_EQUIVALENTS = 
 		{   
-	     0  => LOWEST_RANK    , 
-	     1  => FIRST_RANK     , 
-	     2  => SECOND_RANK    , 
-	     3  => THIRD_RANK     , 
-	     4  => FOURTH_RANK    , 
-	     5  => FIFTH_RANK     , 
-	     6  => SIXTH_RANK     , 
-	     7  => SEVENTH_RANK   , 
-	     8  => EIGHTH_RANK    , 
-	     9  => NINTH_RANK     ,
-	    10  => TENTH_RANK     ,
-	    11  => ELEVENTH_RANK  ,
-	    12  => TWELFTH_RANK   ,
-	    13  => THIRTEENTH_RANK,
-	    14  => FOURTEENTH_RANK,
-	    15  => HIGHEST_RANK  
+	    0  => LOWEST_RANK    , 
+	    1  => FIRST_RANK     , 
+	    2  => SECOND_RANK    , 
+	    3  => THIRD_RANK     , 
+	    4  => FOURTH_RANK    , 
+	    5  => FIFTH_RANK     , 
+	    6  => SIXTH_RANK     , 
+	    7  => SEVENTH_RANK   , 
+	    8  => EIGHTH_RANK    , 
+	    9  => NINTH_RANK     ,
+	   10  => TENTH_RANK     ,
+	   11  => ELEVENTH_RANK  ,
+	   12  => TWELFTH_RANK   ,
+	   13  => THIRTEENTH_RANK,
+	   14  => FOURTEENTH_RANK,
+	   15  => HIGHEST_RANK  
   	}
 
  	POINTS_AWARDED_BY =
-					{
-              -1 =>           1,  
-               0 =>           3,     
-               1 =>    1*1 * 10, 
-               2 =>    2*2 * 10,    
-               3 =>    3*3 * 10,  
-               4 =>    4*4 * 10,  
-               5 =>    5*5 * 10,
-               6 =>    6*6 * 10, 
-               7 =>    7*7 * 10,   
-               8 =>    8*8 * 10, 
-               9 =>    9*9 * 10, 
-              10 =>  10*10 * 10,
-              11 =>  11*11 * 10, 
-              12 =>  12*12 * 10,
-              13 =>  13*13 * 10, 
-              14 =>  14*14 * 10, 
-              15 =>  15*15 * 10 
-           }
-
-  RANK_DIFFERENCE_BELOW_WHICH_NO_POINTS_AWARDED = -1 
+		{
+     -1 =>           1,  
+      0 =>           3,     
+      1 =>    1*1 * 10, 
+      2 =>    2*2 * 10,    
+      3 =>    3*3 * 10,  
+      4 =>    4*4 * 10,  
+      5 =>    5*5 * 10,
+      6 =>    6*6 * 10, 
+      7 =>    7*7 * 10,   
+      8 =>    8*8 * 10, 
+      9 =>    9*9 * 10, 
+     10 =>  10*10 * 10,
+     11 =>  11*11 * 10, 
+     12 =>  12*12 * 10,
+     13 =>  13*13 * 10, 
+     14 =>  14*14 * 10, 
+     15 =>  15*15 * 10 
+    }
+	RANK_DIFFERENCE_BELOW_WHICH_NO_POINTS_AWARDED = -1 
   MINIMUM_SCORE_IN_RANK    = 0  
   MAXIMUM_ATTAINABLE_SCORE = 1500      
 
