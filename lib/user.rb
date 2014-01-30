@@ -1,81 +1,165 @@
 class User
+	
+	LOWEST_RANK     = -8
+	FIRST_RANK      = -7
+	SECOND_RANK     = -6
+	THIRD_RANK      = -5
+	FOURTH_RANK     = -4
+	FIFTH_RANK      = -3
+	SIXTH_RANK      = -2
+	SEVENTH_RANK    = -1
+	EIGHTH_RANK     = 1
+	NINTH_RANK      = 2
+	TENTH_RANK      = 3
+	ELEVENTH_RANK   = 4
+	TWELFTH_RANK    = 5
+	THIRTEENTH_RANK = 6
+	FOURTEENTH_RANK = 7
+	HIGHEST_RANK    = 8
+
+	RANKS= [ LOWEST_RANK,	FIRST_RANK, SECOND_RANK, THIRD_RANK, FOURTH_RANK, FIFTH_RANK, SIXTH_RANK, SEVENTH_RANK,
+		       EIGHTH_RANK, NINTH_RANK, TENTH_RANK, ELEVENTH_RANK, TWELFTH_RANK, THIRTEENTH_RANK, FOURTEENTH_RANK,
+		    	 HIGHEST_RANK 
+		     ]
+
+	RANK_POINTS = {
+
+	         LOWEST_RANK     =>    0,
+	         FIRST_RANK      =>  100,
+	         SECOND_RANK     =>  200,
+	         THIRD_RANK      =>  300,
+	         FOURTH_RANK     =>  400,
+	         FIFTH_RANK      =>  500,
+	         SIXTH_RANK      =>  600,
+	         SEVENTH_RANK    =>  700,
+	         EIGHTH_RANK     =>  800,
+	         NINTH_RANK      =>  900,
+	         TENTH_RANK      => 1000,
+	         ELEVENTH_RANK   => 1100,
+	         TWELFTH_RANK    => 1200,
+	         THIRTEENTH_RANK => 1300,
+	         FOURTEENTH_RANK => 1400,
+	         HIGHEST_RANK    => 1500
+	}
+	RANK_POINTS_INCREMENT  = 100
+
+	RANK_NUMBER_EQUIVALENTS = 
+		{   
+	    LOWEST_RANK     =>  0,
+	    FIRST_RANK      =>  1,
+	    SECOND_RANK     =>  2,
+	    THIRD_RANK      =>  3,
+	    FOURTH_RANK     =>  4, 
+	    FIFTH_RANK      =>  5,
+	    SIXTH_RANK      =>  6,
+	    SEVENTH_RANK    =>  7, 
+      EIGHTH_RANK     =>  8,
+	    NINTH_RANK      =>  9,
+	    TENTH_RANK      => 10,
+	    ELEVENTH_RANK   => 11,
+	    TWELFTH_RANK    => 12,
+	    THIRTEENTH_RANK => 13,
+	    FOURTEENTH_RANK => 14,
+	    HIGHEST_RANK    => 15
+  	}
+
+
+	NUMBER_RANK_EQUIVALENTS = 
+		{   
+	     0  => LOWEST_RANK    , 
+	     1  => FIRST_RANK     , 
+	     2  => SECOND_RANK    , 
+	     3  => THIRD_RANK     , 
+	     4  => FOURTH_RANK    , 
+	     5  => FIFTH_RANK     , 
+	     6  => SIXTH_RANK     , 
+	     7  => SEVENTH_RANK   , 
+       8  => EIGHTH_RANK    , 
+       9  => NINTH_RANK     ,
+	    10  => TENTH_RANK     ,
+	    11  => ELEVENTH_RANK  ,
+	    12  => TWELFTH_RANK   ,
+	    13  => THIRTEENTH_RANK,
+	    14  => FOURTEENTH_RANK,
+	    15  => HIGHEST_RANK  
+  	}
+
+ 	POINTS_AWARDED_BY =
+					{
+              -1 =>           1,  
+               0 =>           3,     
+               1 =>    1*1 * 10, 
+               2 =>    2*2 * 10,    
+               3 =>    3*3 * 10,  
+               4 =>    4*4 * 10,  
+               5 =>    5*5 * 10,
+               6 =>    6*6 * 10, 
+               7 =>    7*7 * 10,   
+               8 =>    8*8 * 10, 
+               9 =>    9*9 * 10, 
+              10 =>  10*10 * 10,
+              11 =>  11*11 * 10, 
+              12 =>  12*12 * 10,
+              13 =>  13*13 * 10, 
+              14 =>  14*14 * 10, 
+              15 =>  15*15 * 10 
+           }
+
+  RANK_DIFFERENCE_BELOW_WHICH_NO_POINTS_AWARDED = -1 
+  MINIMUM_SCORE_IN_RANK = 0  
+  MAXIMUM_ATTAINABLE_SCORE = 1500      
 
 	def initialize
-		@rank = -8
-		@progress = 0
+
+		@users_current_rank = LOWEST_RANK
+		@progress = MINIMUM_SCORE_IN_RANK
 		
-    # there's no reason to manually precalculate all of this. It really should be automatically calculated
-		
-		# Disagree; what's the point of having a computer calculate something where the 
-		# answer is known?
-
-		@ranks = {  
-               -8 => 1, -7 => 2, -6 => 3, -5 => 4, -4 => 5, -3 => 6, -2 => 7, -1 => 8,
-                1 => 9,  2 => 10, 3 => 11, 4 => 12, 5 => 13, 6 => 14, 7 => 15, 8 => 16
-  						}
-
-    # The bigger problem here is that it's completely non-obvious what all these numbers mean
-
-    # It would be equally or more non-obvious if they were set out in a calulation.  We have
-    # been encouraged not to use comments, so I'm at a loss as to how to make it more obvious.
-    # What I have done is to set out the answers - any alternative would require the maintainer
-    # to read and understand code.  To me, reading code is harder.
-
-		@level_difference_uplift =
-							{
-  	             -1 =>    1,  0 =>    3,     
-  	              1 =>   10,  2 =>   40,    3 => 90,  4 =>  160,  5 => 250,
-  	              6 =>  360,  7 =>  490,   8 => 640,  9 =>  810, 10 => 1000,
-  	             11 => 1210, 12 => 1440, 13 => 1690, 14 => 1960, 15 => 2250
-  	          }
+    
   	@to_ranks = { 
                 0  => -8,  1 => -7, 2  => -6, 3  => -5, 4  => -4, 5  => -3, 6  => -2, 7  => -1,
                 8  =>  1,  9 =>  2, 10 =>  3, 11 =>  4, 12 =>  5, 13 =>  6, 14 =>  7, 15 =>  8
   						}
-  	@rank_points =
-  						{
-  							-8 => 0, -7 => 100, -6 => 200, -5 => 300, -4 => 400, -3 => 500, -2 => 600, -1 => 700,
-                1 => 800,  2 => 900, 3 => 1000, 4 => 1100, 5 => 1200, 6 => 1300, 7 => 1400, 8 => 1500
-  						}
-
+  
 	end
 
 	def rank
-		@rank
+		@users_current_rank
 	end
 	def progress
 		@progress
 	end
 
-	def inc_progress kata
+	def inc_progress solved_kata
 
-		raise "3 kinds of hell" if !@ranks.include?(kata)
-    # if rank > 8 then this line will never be reached because it'll throw an exception on the previous line
-    
-    # correct, careless refactoring on my part on changing to use include?
+		@rank_difference = RANK_NUMBER_EQUIVALENTS[solved_kata] - RANK_NUMBER_EQUIVALENTS[@users_current_rank]
 
-		return if rank >= 8 
+		return if validation_failure?(solved_kata)
 
-    # if rank == 8 then the progress must be set to 0, which you don't do
+		new_points_total = RANK_POINTS[@users_current_rank] + @progress + POINTS_AWARDED_BY[@rank_difference]
 
-    # rank == 8 is only known at the end of the calculation, where progress is set.
+		assign_rank_based_on(new_points_total)
+	end
 
-		rank_difference = @ranks[kata] - @ranks[@rank]
-		return if rank_difference <= -2
+	def validation_failure? solved_kata
+		
+		fail = false
+		raise "3 kinds of hell" if !RANKS.include?(solved_kata)
+		fail = true if @rank_difference < RANK_DIFFERENCE_BELOW_WHICH_NO_POINTS_AWARDED
 
-    # I'm sure there's logic behind this but the code could be more readable.
+		fail
+	end
 
-    # I am genuinely interested in suggestions as to how.  It's a simple sum adding up 
-    # a) the points the user already has b) progress c) rank uplift.
-
-		new_points_total = @rank_points[@rank] + @progress + @level_difference_uplift[rank_difference]
-
-		if new_points_total >= 1500 # magic number (http://stackoverflow.com/questions/47882/what-is-a-magic-number-and-why-is-it-bad)
-			@rank = 8
-			@progress = 0
+	def assign_rank_based_on new_points_total
+#puts ">>#{new_points_total} #{@progress}"
+		if new_points_total >= MAXIMUM_ATTAINABLE_SCORE 
+	#		puts "taking highest rank"
+			@users_current_rank = HIGHEST_RANK
+			@progress           = MINIMUM_SCORE_IN_RANK
+	#		puts "what?! #{@users_current_rank} #{@progress}"
 		else
-			@rank = @to_ranks[new_points_total/100]	
-			@progress = new_points_total%100
+			@users_current_rank = NUMBER_RANK_EQUIVALENTS[new_points_total / RANK_POINTS_INCREMENT]	
+			@progress           = new_points_total % RANK_POINTS_INCREMENT
 		end
+	#	puts "!! #{@users_current_rank} #{@progress}"
 	end
 end
