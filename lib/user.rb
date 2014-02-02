@@ -1,30 +1,27 @@
 class User
-	
-	LOWEST_RANK     = -8
-	FIRST_RANK      = -7
-	SECOND_RANK     = -6
-	THIRD_RANK      = -5
-	FOURTH_RANK     = -4
-	FIFTH_RANK      = -3
-	SIXTH_RANK      = -2
-	SEVENTH_RANK    = -1
-	EIGHTH_RANK     = 1
-	NINTH_RANK      = 2
-	TENTH_RANK      = 3
-	ELEVENTH_RANK   = 4
-	TWELFTH_RANK    = 5
-	THIRTEENTH_RANK = 6
-	FOURTEENTH_RANK = 7
-	HIGHEST_RANK    = 8
 
-	RANKS= [ LOWEST_RANK, FIRST_RANK, SECOND_RANK, THIRD_RANK, FOURTH_RANK, FIFTH_RANK, SIXTH_RANK, SEVENTH_RANK,
-		       EIGHTH_RANK, NINTH_RANK, TENTH_RANK, ELEVENTH_RANK, TWELFTH_RANK, THIRTEENTH_RANK, FOURTEENTH_RANK,
-           HIGHEST_RANK 
-		     ]
+	RANKS= 
+	  [ 
+      LOWEST_RANK     = -8,
+	    FIRST_RANK      = -7,
+	    SECOND_RANK     = -6,
+	    THIRD_RANK      = -5,
+	    FOURTH_RANK     = -4,
+	    FIFTH_RANK      = -3,
+	    SIXTH_RANK      = -2,
+	    SEVENTH_RANK    = -1,
+	    EIGHTH_RANK     = 1,
+	    NINTH_RANK      = 2,
+	    TENTH_RANK      = 3,
+	    ELEVENTH_RANK   = 4,
+	    TWELFTH_RANK    = 5,
+	    THIRTEENTH_RANK = 6,
+	    FOURTEENTH_RANK = 7,
+	    HIGHEST_RANK    = 8
+		]
 
 	RANK_POINTS = 
 		{
-
 	    LOWEST_RANK     =>    0,
 	    FIRST_RANK      =>  100,
 	    SECOND_RANK     =>  200,
@@ -42,6 +39,7 @@ class User
 	    FOURTEENTH_RANK => 1400,
 	    HIGHEST_RANK    => 1500
 		}
+
 	RANK_POINTS_INCREMENT  = 100
 
 	RANK_NUMBER_EQUIVALENTS = 
@@ -63,7 +61,6 @@ class User
 	    FOURTEENTH_RANK => 14,
 	    HIGHEST_RANK    => 15
   	}
-
 
 	NUMBER_RANK_EQUIVALENTS = 
 		{   
@@ -105,6 +102,7 @@ class User
      14 =>  14*14 * 10, 
      15 =>  15*15 * 10 
     }
+    
 	RANK_DIFFERENCE_BELOW_WHICH_NO_POINTS_AWARDED = -1 
   MINIMUM_SCORE_IN_RANK    = 0  
   MAXIMUM_ATTAINABLE_SCORE = 1500      
@@ -124,23 +122,15 @@ class User
 	end
 
 	def inc_progress solved_kata
-
+    
+    raise "3 kinds of hell" if !RANKS.include?(solved_kata)
+		
 		@rank_difference = RANK_NUMBER_EQUIVALENTS[solved_kata] - RANK_NUMBER_EQUIVALENTS[@users_current_rank]
-
-		return if validation_failure?(solved_kata)
+		return if @rank_difference < RANK_DIFFERENCE_BELOW_WHICH_NO_POINTS_AWARDED
 
 		new_points_total = RANK_POINTS[@users_current_rank] + @progress + POINTS_AWARDED_BY[@rank_difference]
 
 		assign_rank_based_on(new_points_total)
-	end
-
-	def validation_failure? solved_kata
-		
-		status = false
-		raise "3 kinds of hell" if !RANKS.include?(solved_kata)
-		status = true if @rank_difference < RANK_DIFFERENCE_BELOW_WHICH_NO_POINTS_AWARDED
-
-		status
 	end
 
 	def assign_rank_based_on new_points_total
